@@ -1,0 +1,29 @@
+<h2>Varient</h2>
+<p>
+  <strong>Colour:</strong>
+  <%= pvarient.colour %>
+</p>
+ 
+<p>
+  <strong>Size:</strong>
+  <%= pvarient.size %>
+</p>
+<p>
+  <strong>Warrenty:</strong>
+  <%= pvarient.warrenty %>
+</p>
+<p>
+  <strong>Style:</strong>
+  <%= pvarient.style %>
+</p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag pvarient.image.thumb.url %>
+</p>
+<% if current_user and current_user.has_role? :admin %>
+<p>
+  <%= link_to 'Destroy Varient', [pvarient.product, pvarient],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
+<% end %>

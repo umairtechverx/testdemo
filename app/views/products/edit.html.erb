@@ -1,0 +1,53 @@
+
+ 
+ <div class="col-md-4">
+</div>
+<div class="col-md-4">
+<h1>Editing Product</h1>
+<%= form_for :product, url: product_path(@product), method: :patch do |f| %>
+ 
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@product.errors.count, "error") %> prohibited
+        this product from being saved:
+      </h2>
+      <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </p>
+ 
+  <p>
+    <%= f.label :price %><br>
+    <%= f.text_field :price, autofocus: true, class: "form-control" %>
+  </p>
+   <p>
+    <%= f.label :ptype %><br>
+    <%= f.text_field :ptype, autofocus: true, class: "form-control"%>
+  </p>
+<p>
+    <%= f.label :pquantity %><br>
+    <%= f.text_field :quantity, autofocus: true, class: "form-control"%>
+  </p><p>
+  <strong>Current Image:</strong>
+  <%= image_tag @product.image.thumb.url %>
+</p>
+<p>
+  <%= f.label :Add_New_Image %><br>
+    <%= f.file_field :image %>
+ </p>
+  <p>
+    <%= f.submit "update", class:"btn btn-lg btn-primary btn-block" %>
+  </p>
+ 
+<% end %>
+ <%= link_to 'Back', product_path %>
+</div>

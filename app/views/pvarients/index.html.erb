@@ -1,0 +1,32 @@
+<h1>Listing Products</h1>
+ 
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Product Price</th>
+    <th>Product Type</th>
+    <th>Product Image</th>
+
+
+
+  </tr>
+ 
+  <%  @pvarient.try (:each) do |pvarient| %>
+    <tr>
+      <td class="col-xs-6 col-lg-2"><%= pvarient.colours %></td>
+      <td class="col-xs-6 col-lg-2"><%= pvarient.size %></td>
+      <td class="col-xs-6 col-lg-2"><%= pvarient.warrenty %></td>
+            <td class="col-xs-6 col-lg-2"><%= pvarient.style %></td>
+      <td class="col-xs-6 col-lg-2"><%= image_tag pvarient.image.thumb.url %></td>
+      <td><%= link_to 'Show', product_path(product) %></td>
+      <% if current_user and current_user.has_role? :admin %>
+      
+      <td><%= link_to 'Destroy', product_path(product),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+
+    </tr>
+    
+  <% end %>
+</table>

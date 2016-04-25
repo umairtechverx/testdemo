@@ -1,0 +1,47 @@
+<script>
+     function showhide()
+     {
+           var div = document.getElementById("addvarient");
+    if (div.style.display !== "none") {
+        div.style.display = "none";
+    }
+    else {
+        div.style.display = "block";
+    }
+     }
+     function change() // no ';' here
+{
+    if (this.value=="Want to Add Varient Click me") this.value = "Hide/Cancel";
+    else this.value = "Want to Add Varient Click me";
+}
+  </script>
+  <input type="button"  id="button" value="Want to Add Varient Click me"  class="btn btn-lg btn-warning" onclick="showhide(); change();"/> 
+<div id = "addvarient" style="display: none;">
+
+<h2>Varient:</h2>
+<%= form_for([@product, @product.pvarients.build]) do |f| %>
+  <p>
+    <%= f.label :Colour %><br>
+    <%= f.text_field :colour, autofocus: true, class: "form-control" %>
+  </p>
+  <p>
+    <%= f.label :Size %><br>
+    <%= f.text_field :size, autofocus: true, class: "form-control" %>
+  </p>
+<p>
+    <%= f.label :Warrenty %><br>
+    <%= f.text_field :warrenty, autofocus: true, class: "form-control" %>
+  </p>
+<p>
+    <%= f.label :Style %><br>
+    <%= f.text_field :style, autofocus: true, class: "form-control" %>
+  </p>
+<p>
+  <%= f.label :image %><br>
+    <%= f.file_field :image %>
+ </p>
+  <p>
+    <%= f.submit "Add Varient", class:"btn btn-lg btn-primary btn-block" %>
+  </p>
+<% end %>
+</div>

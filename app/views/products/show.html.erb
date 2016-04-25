@@ -1,0 +1,40 @@
+<div class="col-xs-6 col-lg-4">
+<h2> Product </h2>
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+ 
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @product.ptype %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @product.pdescription %>
+</p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @product.image.thumb.url %>
+</p>
+<p>
+  <strong>Quantity:</strong>
+  <%= @product.quantity %>
+</p>
+
+
+<div>
+<%= render @product.pvarients %>
+</div>
+</div>
+      <% if current_user and current_user.has_role? :admin %>
+
+<div class="col-xs-6 col-lg-4">
+
+<%= render 'pvarients/form' %>
+</div>
+<% end %>

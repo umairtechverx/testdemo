@@ -1,0 +1,27 @@
+<h2>Varient:</h2>
+<%= form_for :product, url: product_path(@pvarients), method: :patch do |f| %>
+
+  <p>
+    <%= f.label :Colour %><br>
+    <%= f.text_field :colour %>
+  </p>
+  <p>
+    <%= f.label :Size %><br>
+    <%= f.text_field :size %>
+  </p>
+<p>
+    <%= f.label :Warrenty %><br>
+    <%= f.text_field :warrenty %>
+  </p>
+<p>
+    <%= f.label :Style %><br>
+    <%= f.text_field :style %>
+  </p>
+<p>
+  <%= f.label :image %><br>
+    <%= f.file_field :image %>
+ </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

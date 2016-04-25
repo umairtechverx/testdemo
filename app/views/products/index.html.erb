@@ -1,0 +1,108 @@
+<script type="text/javascript">
+ function subtractQty(){
+      if(document.getElementById("qty").value - 1 < 0)
+        return;
+      else
+         document.getElementById("qty").value--;
+    }
+</script>
+
+<ul  id="products" > </ul>
+<button id="addorder"> </button>
+
+<h1>Listing Products</h1>
+ 
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Product Price</th>
+    <th>Product Type</th>
+    <th>Product Image</th>
+
+
+
+  </tr>
+ <td>
+  <% @products.try (:each) do |product| %>
+    <tr>
+      <td class="col-xs-6 col-lg-2"><%= product.name %></td>
+      <td class="col-xs-6 col-lg-2"><%= product.price %></td>
+      <td class="col-xs-6 col-lg-2"><%= product.ptype %></td>
+      <td class="col-xs-6 col-lg-2"><%= product.ptype %></td>
+      <td id='qty' class="col-xs-6 col-lg-2"> 
+
+      <input type='button' name='add' class="add fit_<%= product.id%>" data-id="<%= product.id%>" data-qty="<%= product.quantity %>"/>
+     
+       <p class="qty">10 </p>
+      </td>
+      <td class="col-xs-6 col-lg-2">
+      <p>
+      <img src="http://i.imgur.com/yOadS1c.png" id="minus1" width="20" height="20" class="minus"/>
+      <input id="qty1" type="text" value="1" class="qty" style="border: none;" />
+      <img id="add1" src="http://i.imgur.com/98cvZnj.png" width="20" height="20" class="add1"/>
+    </p>
+      </td>
+
+      <td class="col-xs-6 col-lg-2"><%= image_tag product.image.thumb.url %></td>
+      <td><%= link_to 'Show', product_path(product) %></td>
+      <% if current_user and current_user.has_role? :admin %>
+      <td><%= link_to 'Edit', edit_product_path(product) %></td>
+      <td><%= link_to 'Destroy', product_path(product),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+
+    </tr>
+    </td>
+  <% end %>
+</table>
+<script type="text/javascript">
+
+
+    $(".add").click(function(){
+var first_number = parseInt($(".add").val(currentVal));
+      console.log($(this).parent().find(".qty").html());
+      console.log($(this).data('id'));
+      console.log($(this).data('qty')+ first_number);
+      
+    });
+  
+//Increasing and decreasing
+$(function () {
+    $('.add1').on('click',function(){
+        var $qty=$(this).closest('p').find('.qty');
+        var currentVal = parseInt($qty.val());
+        if (!isNaN(currentVal)) {
+            $qty.val(currentVal + 1);
+        }
+    });
+    $('.minus').on('click',function(){
+        var $qty=$(this).closest('p').find('.qty');
+        var currentVal = parseInt($qty.val());
+        if (!isNaN(currentVal) && currentVal > 0) {
+            $qty.val(currentVal - 1); 
+        }
+    });
+});
+ 
+//Adding value to Quantity ajax
+$("#addorder").click(function(){
+  var productId = 2;
+  $.ajax({
+      type: "POST",
+      url: "/products/add-quantity",
+      data: {
+        product: {
+          product_id: 2,
+          qty: 89
+        }
+      },
+      success: function(data) {
+       console.log(data);
+       $("fit_"+productId).parent().find('p').html(data);
+       console.log($(this));
+      }
+    });
+});
+
+</script>
