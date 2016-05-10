@@ -14,6 +14,7 @@ gem "cancan"
 gem "rolify"
 gem 'carrierwave', '~> 0.11.0'
 gem 'mini_magick', '~> 4.5.1'
+gem 'owlcarousel-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 # Use Uglifier as compressor for JavaScript assets
